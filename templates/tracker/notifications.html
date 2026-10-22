@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Notifications | BugReport Hub{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">Notifications</h1>
+  <form method="post">
+    {% csrf_token %}
+    <button class="btn btn-sm btn-outline-secondary">Mark all as read</button>
+  </form>
+</div>
+<div class="list-group">
+  {% for n in items %}
+  <a href="{% url 'report_detail' n.report.pk %}"
+     class="list-group-item list-group-item-action {% if not n.is_read %}fw-bold{% endif %}">
+    {{ n.message }}
+    <small class="text-muted float-end">{{ n.created_at|date:"d M Y H:i" }}</small>
+  </a>
+  {% empty %}
+  <div class="list-group-item text-muted">Nothing yet. You will be told here when a report is received or its status changes.</div>
+  {% endfor %}
+</div>
+{% endblock %}

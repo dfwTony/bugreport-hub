@@ -1,0 +1,20 @@
+:root {
+  --ink: #1b2b34;
+  --paper: #f4f6f7;
+  --brand: #0b6e6e;
+  --brand-dark: #095858;
+  --line: #d9e0e3;
+}
+body { font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--paper); }
+.navbar { background: var(--ink); }
+.navbar-brand { font-weight: 600; letter-spacing: .2px; }
+.btn-primary { --bs-btn-bg: var(--brand); --bs-btn-border-color: var(--brand);
+  --bs-btn-hover-bg: var(--brand-dark); --bs-btn-hover-border-color: var(--brand-dark);
+  --bs-btn-active-bg: var(--brand-dark); --bs-btn-active-border-color: var(--brand-dark); }
+a { color: var(--brand); }
+.card { border-color: var(--line); border-radius: .5rem; }
+.stat { font-size: 2rem; font-weight: 600; line-height: 1; }
+.table > :not(caption) > * > * { padding: .75rem; }
+.auth-wrap { min-height: 100vh; display: flex; align-items: center; }
+.form-control:focus, .form-select:focus { border-color: var(--brand); box-shadow: 0 0 0 .2rem rgba(11,110,110,.2); }
+:focus-visible { outline: 3px solid rgba(11,110,110,.45); outline-offset: 2px; }

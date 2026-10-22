@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Summary | BugReport Hub{% endblock %}
+{% block content %}
+<style>@media print { .no-print, nav { display: none !important; } }</style>
+<h1 class="h3 mb-3">Bug report summary</h1>
+<form method="get" class="row g-2 mb-4 no-print">
+  <div class="col-6 col-md-3">
+    <label for="from" class="form-label small">From</label>
+    <input id="from" type="date" name="from" value="{{ date_from }}" class="form-control">
+  </div>
+  <div class="col-6 col-md-3">
+    <label for="to" class="form-label small">To</label>
+    <input id="to" type="date" name="to" value="{{ date_to }}" class="form-control">
+  </div>
+  <div class="col-6 col-md-2 d-flex align-items-end"><button class="btn btn-secondary w-100">Apply</button></div>
+  <div class="col-6 col-md-3 d-flex align-items-end">
+    <button type="button" class="btn btn-outline-dark w-100" onclick="window.print()">Print report</button>
+  </div>
+</form>
+<p class="lead">Reports in this period: <strong>{{ total }}</strong></p>
+<div class="row g-3">
+  <div class="col-md-4"><div class="card"><div class="card-header">By status</div>
+    <table class="table mb-0">
+      {% for label, n in by_status %}<tr><td>{{ label }}</td><td class="text-end">{{ n }}</td></tr>
+      {% empty %}<tr><td class="text-muted">No reports in this period.</td></tr>{% endfor %}
+    </table></div></div>
+  <div class="col-md-4"><div class="card"><div class="card-header">By priority</div>
+    <table class="table mb-0">
+      {% for label, n in by_priority %}<tr><td>{{ label }}</td><td class="text-end">{{ n }}</td></tr>
+      {% empty %}<tr><td class="text-muted">No reports in this period.</td></tr>{% endfor %}
+    </table></div></div>
+  <div class="col-md-4"><div class="card"><div class="card-header">By category</div>
+    <table class="table mb-0">
+      {% for label, n in by_category %}<tr><td>{{ label }}</td><td class="text-end">{{ n }}</td></tr>
+      {% empty %}<tr><td class="text-muted">No reports in this period.</td></tr>{% endfor %}
+    </table></div></div>
+</div>
+{% endblock %}

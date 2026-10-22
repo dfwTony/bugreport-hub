@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | BugReport Hub{% endblock %}
+{% block content %}
+<h1 class="h3 mb-4">Dashboard</h1>
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3"><div class="card"><div class="card-body">
+    <div class="stat">{{ stats.total }}</div><div class="text-muted mt-1">Total reports</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="card"><div class="card-body">
+    <div class="stat text-primary">{{ stats.new }}</div><div class="text-muted mt-1">New</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="card"><div class="card-body">
+    <div class="stat text-warning">{{ stats.in_progress }}</div><div class="text-muted mt-1">In progress</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="card"><div class="card-body">
+    <div class="stat text-success">{{ stats.resolved }}</div><div class="text-muted mt-1">Resolved or closed</div></div></div></div>
+</div>
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <span>Recent reports</span>
+    <a class="btn btn-sm btn-primary" href="{% url 'report_create' %}">New report</a>
+  </div>
+  {% include "tracker/_report_table.html" with reports=recent %}
+</div>
+{% endblock %}

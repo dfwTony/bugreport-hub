@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Reports | BugReport Hub{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">{% if user.is_staff %}All reports{% else %}My reports{% endif %}</h1>
+<form method="get" class="row g-2 mb-3">
+  <div class="col-md-5">
+    <input name="q" value="{{ q }}" class="form-control" placeholder="Search by title or module" aria-label="Search">
+  </div>
+  <div class="col-6 col-md-3">
+    <select name="status" class="form-select" aria-label="Status">
+      <option value="">Any status</option>
+      {% for value, label in statuses %}
+      <option value="{{ value }}" {% if value == status %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-6 col-md-2">
+    <select name="priority" class="form-select" aria-label="Priority">
+      <option value="">Any priority</option>
+      {% for value, label in priorities %}
+      <option value="{{ value }}" {% if value == priority %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-2"><button class="btn btn-secondary w-100">Filter</button></div>
+{% if user.is_staff %}
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="mine" value="1" id="mine" {% if mine %}checked{% endif %}>
+      <label class="form-check-label" for="mine">Only reports assigned to me</label>
+    </div>
+  </div>
+{% endif %}
+</form>
+<div class="card">{% include "tracker/_report_table.html" %}</div>
+{% endblock %}
